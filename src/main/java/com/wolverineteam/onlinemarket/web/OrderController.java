@@ -1,4 +1,4 @@
 package com.wolverineteam.onlinemarket.web;
 
-public class SmartPhoneController {
+public class OrderController {
 }
