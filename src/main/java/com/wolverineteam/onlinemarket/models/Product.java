@@ -11,16 +11,16 @@ public class Product {
     @Column(name = "ProductID")
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "BrandID")
-    private Brand brand;
+
+    @Column(name = "BrandID")
+    private String brand;
 
     @Column(name = "Model")
     private String model;
 
-    @ManyToOne
-    @JoinColumn(name = "CategoryID")
-    private Category category;
+
+    @Column(name = "CategoryID")
+    private String category;
 
     @Column(name = "Description")
     private String description;
@@ -32,7 +32,7 @@ public class Product {
 
     }
 
-    public Product(Brand brand, String model, Category category, String description, int quantity) {
+    public Product(String brand, String model, String category, String description, int quantity) {
         this.brand = brand;
         this.model = model;
         this.category = category;
@@ -48,11 +48,11 @@ public class Product {
         this.id = id;
     }
 
-    public Brand getBrand() {
+    public String getBrand() {
         return brand;
     }
 
-    public void setBrand(Brand brand) {
+    public void setBrand(String brand) {
         this.brand = brand;
     }
 
@@ -64,11 +64,11 @@ public class Product {
         this.model = model;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
