@@ -1,5 +1,7 @@
 package com.wolverineteam.onlinemarket.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,6 +20,7 @@ public class Customer {
     @Column(name = "Password")
     private String password;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "customer")
     private List<Order> orders;
 

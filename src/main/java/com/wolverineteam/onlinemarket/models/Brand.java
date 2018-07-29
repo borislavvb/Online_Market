@@ -1,7 +1,6 @@
 package com.wolverineteam.onlinemarket.models;
 
-
-import org.hibernate.validator.constraints.URL;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,6 +17,7 @@ public class Brand {
     @Column(name = "BrandName")
     private String brandName;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "brand")
     private List<Product> products;
 
