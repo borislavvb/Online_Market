@@ -1,5 +1,7 @@
 package com.wolverineteam.onlinemarket.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,16 +13,16 @@ public class Product {
     @Column(name = "ProductID")
     private int id;
 
-
-    @Column(name = "BrandID")
-    private String brand;
+    @ManyToOne
+    @JoinColumn(name = "BrandID")
+    private Brand brand;
 
     @Column(name = "Model")
     private String model;
 
-
-    @Column(name = "CategoryID")
-    private String category;
+    @ManyToOne
+    @JoinColumn(name = "CategoryID")
+    private Category category;
 
     @Column(name = "Description")
     private String description;
@@ -32,7 +34,7 @@ public class Product {
 
     }
 
-    public Product(String brand, String model, String category, String description, int quantity) {
+    public Product(Brand brand, String model, Category category, String description, int quantity) {
         this.brand = brand;
         this.model = model;
         this.category = category;
@@ -48,11 +50,11 @@ public class Product {
         this.id = id;
     }
 
-    public String getBrand() {
+    public Brand getBrand() {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    public void setBrand(Brand brand) {
         this.brand = brand;
     }
 
@@ -64,11 +66,11 @@ public class Product {
         this.model = model;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
