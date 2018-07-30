@@ -46,12 +46,12 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     @Override
-    public void update(int id, Order product) {
+    public void update(int id, Order order) {
 
     }
 
     @Override
-    public void create(Order product) {
+    public void create(Order order) {
 
     }
 

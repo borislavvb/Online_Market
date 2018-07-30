@@ -46,12 +46,12 @@ public class BrandRepositoryImpl implements BrandRepository {
     }
 
     @Override
-    public void update(int id, Brand product) {
+    public void update(int id, Brand brand) {
 
     }
 
     @Override
-    public void create(Brand product) {
+    public void create(Brand brand) {
 
     }
 

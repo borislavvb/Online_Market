@@ -46,12 +46,12 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     @Override
-    public void update(int id, Category product) {
+    public void update(int id, Category category) {
 
     }
 
     @Override
-    public void create(Category product) {
+    public void create(Category category) {
 
     }
 

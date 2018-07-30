@@ -46,12 +46,12 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
-    public void update(int id, Customer product) {
+    public void update(int id, Customer customer) {
 
     }
 
     @Override
-    public void create(Customer product) {
+    public void create(Customer customer) {
 
     }
 

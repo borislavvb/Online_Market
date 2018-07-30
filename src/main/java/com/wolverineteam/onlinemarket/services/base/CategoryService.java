@@ -10,9 +10,9 @@ public interface CategoryService {
 
     List<Category> getAll();
 
-    void update(int id, Category product);
+    void update(int id, Category category);
 
-    void create(Category product);
+    void create(Category category);
 
     void delete(int id);
 }
