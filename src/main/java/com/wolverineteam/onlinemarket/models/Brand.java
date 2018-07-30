@@ -3,6 +3,7 @@ package com.wolverineteam.onlinemarket.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,7 +19,7 @@ public class Brand {
     private String brandName;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "brand")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "brand",cascade = CascadeType.ALL)
     private List<Product> products;
 
     public Brand(){

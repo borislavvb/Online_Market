@@ -2,6 +2,7 @@ package com.wolverineteam.onlinemarket.services;
 
 import com.wolverineteam.onlinemarket.data.base.BrandRepository;
 import com.wolverineteam.onlinemarket.models.Brand;
+import com.wolverineteam.onlinemarket.models.Product;
 import com.wolverineteam.onlinemarket.services.base.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,11 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public List<Brand> getAll() {
         return brandRepository.getAll();
+    }
+
+    @Override
+    public List<Product> getAllBrandProducts(int id) {
+        return brandRepository.getAllBrandProducts(id);
     }
 
     @Override

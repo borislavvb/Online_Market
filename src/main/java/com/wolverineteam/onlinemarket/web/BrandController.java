@@ -1,6 +1,7 @@
 package com.wolverineteam.onlinemarket.web;
 
 import com.wolverineteam.onlinemarket.models.Brand;
+import com.wolverineteam.onlinemarket.models.Product;
 import com.wolverineteam.onlinemarket.services.base.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,12 @@ public class BrandController {
     @GetMapping("/")
     public List<Brand> getAll() {
         return brandService.getAll();
+    }
+
+    @GetMapping("/products/{id}")
+    public List<Product> getAllBrandProducts(@PathVariable("id") String strId){
+        int id = Integer.parseInt(strId);
+        return brandService.getAllBrandProducts(id);
     }
 
     @PutMapping("/update/{id}")
