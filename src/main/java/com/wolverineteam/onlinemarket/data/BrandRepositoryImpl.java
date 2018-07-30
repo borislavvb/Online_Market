@@ -47,16 +47,37 @@ public class BrandRepositoryImpl implements BrandRepository {
 
     @Override
     public void update(int id, Brand brand) {
-
+        Brand oldBrand = getById(id);
+        oldBrand.setBrandName(brand.getBrandName());
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.update(oldBrand);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
     public void create(Brand brand) {
-
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.save(brand);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
     public void delete(int id) {
-
+        Brand brand = getById(id);
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.delete(brand);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
