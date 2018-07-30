@@ -3,10 +3,7 @@ package com.wolverineteam.onlinemarket.web;
 import com.wolverineteam.onlinemarket.models.Product;
 import com.wolverineteam.onlinemarket.services.base.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,16 +29,19 @@ public class ProductController {
         return productService.getAll();
     }
 
-    public void update(String strId, Product product) {
+    @PutMapping("/update/{id}")
+    public void update(@PathVariable("id") String strId, @RequestBody Product product) {
         int id = Integer.parseInt(strId);
         productService.update(id, product);
     }
 
-    public void create(Product product) {
+    @PostMapping("/create")
+    public void create(@RequestBody Product product) {
         productService.create(product);
     }
 
-    public void delete(String strId) {
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable("id") String strId) {
         int id = Integer.parseInt(strId);
         productService.delete(id);
     }
