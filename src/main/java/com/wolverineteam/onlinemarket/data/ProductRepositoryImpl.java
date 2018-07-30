@@ -54,7 +54,13 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public void create(Product product) {
-
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.save(product);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
