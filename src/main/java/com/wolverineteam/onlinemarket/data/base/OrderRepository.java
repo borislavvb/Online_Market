@@ -10,9 +10,9 @@ public interface OrderRepository {
 
     List<Order> getAll();
 
-    void update(int id, Order product);
+    void update(int id, Order order);
 
-    void create(Order product);
+    void create(Order order);
 
     void delete(int id);
 }

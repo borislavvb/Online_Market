@@ -10,9 +10,9 @@ public interface BrandRepository {
 
     List<Brand> getAll();
 
-    void update(int id, Brand product);
+    void update(int id, Brand brand);
 
-    void create(Brand product);
+    void create(Brand brand);
 
     void delete(int id);
 }
