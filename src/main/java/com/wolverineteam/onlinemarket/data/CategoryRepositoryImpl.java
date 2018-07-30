@@ -47,16 +47,37 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public void update(int id, Category category) {
-
+        Category oldCategory = getById(id);
+        oldCategory.setCategoryName(category.getCategoryName());
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.update(oldCategory);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
     public void create(Category category) {
-
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.save(category);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
     public void delete(int id) {
-
+        Category category = getById(id);
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.delete(category);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
