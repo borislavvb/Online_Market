@@ -1,7 +1,6 @@
 package com.wolverineteam.onlinemarket.data.base;
 
 import com.wolverineteam.onlinemarket.models.Brand;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
