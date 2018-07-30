@@ -2,6 +2,7 @@ package com.wolverineteam.onlinemarket.data;
 
 import com.wolverineteam.onlinemarket.data.base.CategoryRepository;
 import com.wolverineteam.onlinemarket.models.Category;
+import com.wolverineteam.onlinemarket.models.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -43,6 +44,19 @@ public class CategoryRepositoryImpl implements CategoryRepository {
             System.out.println(e.getMessage());
         }
         return category;
+    }
+
+    @Override
+    public List<Product> getAllCategoryProducts(int id) {
+        List<Product> products = new ArrayList<>();
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            products = session.get(Category.class,id).getProducts();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return products;
     }
 
     @Override

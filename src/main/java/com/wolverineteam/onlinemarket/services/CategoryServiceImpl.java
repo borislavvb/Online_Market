@@ -2,6 +2,7 @@ package com.wolverineteam.onlinemarket.services;
 
 import com.wolverineteam.onlinemarket.data.base.CategoryRepository;
 import com.wolverineteam.onlinemarket.models.Category;
+import com.wolverineteam.onlinemarket.models.Product;
 import com.wolverineteam.onlinemarket.services.base.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,11 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<Category> getAll() {
         return categoryRepository.getAll();
+    }
+
+    @Override
+    public List<Product> getAllCategoryProducts(int id) {
+        return categoryRepository.getAllCategoryProducts(id);
     }
 
     @Override

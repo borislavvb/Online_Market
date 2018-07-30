@@ -1,6 +1,7 @@
 package com.wolverineteam.onlinemarket.web;
 
 import com.wolverineteam.onlinemarket.models.Category;
+import com.wolverineteam.onlinemarket.models.Product;
 import com.wolverineteam.onlinemarket.services.base.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,12 @@ public class CategoryController {
     @GetMapping("/")
     public List<Category> getAll() {
         return categoryService.getAll();
+    }
+
+    @GetMapping("/{id}/products")
+    public List<Product> getAllCategoryProducts(@PathVariable("id") String strId){
+        int id = Integer.parseInt(strId);
+        return categoryService.getAllCategoryProducts(id);
     }
 
     @PutMapping("/update/{id}")

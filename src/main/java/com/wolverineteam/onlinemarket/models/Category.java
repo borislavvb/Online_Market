@@ -18,7 +18,7 @@ public class Category {
     private String categoryName;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "category")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "category")
     private List<Product> products;
 
     public Category(){

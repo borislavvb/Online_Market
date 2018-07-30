@@ -30,7 +30,7 @@ public class BrandController {
         return brandService.getAll();
     }
 
-    @GetMapping("/products/{id}")
+    @GetMapping("/{id}/products")
     public List<Product> getAllBrandProducts(@PathVariable("id") String strId){
         int id = Integer.parseInt(strId);
         return brandService.getAllBrandProducts(id);
