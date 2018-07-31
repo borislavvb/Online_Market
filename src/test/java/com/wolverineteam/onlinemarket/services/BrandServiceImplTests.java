@@ -17,7 +17,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BrandServiceImplTest {
+public class BrandServiceImplTests {
     @Mock
     BrandRepository mockRepository;
 
@@ -68,8 +68,8 @@ public class BrandServiceImplTest {
 
     @Test
     public void UpdateBrand_Returns_UpdatedBrand(){
-        Brand mockBrand1 = mock(Brand.class);
-        Brand mockBrand2 = mock(Brand.class);
+        Brand mockBrand1 = new Brand("MockBrand1");
+        Brand mockBrand2 = new Brand("MockBrand2");
 
         mockRepository.update(1,mockBrand2);
 

@@ -19,7 +19,7 @@ import java.util.List;
 import static org.mockito.Mockito.mock;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CategoryServiceImplTest {
+public class CategoryServiceImplTests {
     @Mock
     CategoryRepository mockRepository;
 
@@ -70,8 +70,8 @@ public class CategoryServiceImplTest {
 
     @Test
     public void UpdateCategory_Returns_UpdatedCategory(){
-        Category mockCategory1 = mock(Category.class);
-        Category mockCategory2 = mock(Category.class);
+        Category mockCategory1 = new Category("MockCategory1");
+        Category mockCategory2 = new Category("MockCategory2");
 
         mockRepository.update(1,mockCategory2);
 
