@@ -13,7 +13,7 @@ public class Product {
     @Column(name = "ProductID")
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "BrandID")
     private Brand brand;
 
