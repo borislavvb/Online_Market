@@ -5,6 +5,7 @@ import com.wolverineteam.onlinemarket.models.Brand;
 import com.wolverineteam.onlinemarket.models.Category;
 import com.wolverineteam.onlinemarket.models.Product;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
@@ -13,8 +14,13 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
+import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
+import static org.hamcrest.core.IsNull.notNullValue;
+import static org.junit.Assert.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.isA;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BrandServiceImplTests {
@@ -27,7 +33,7 @@ public class BrandServiceImplTests {
     @Test
     public void GetById_Return_BrandWithSameId(){
 
-        Mockito.when(mockRepository.getById(1))
+        when(mockRepository.getById(1))
                 .thenReturn(new Brand("TestBrand1"));
 
         Brand result = service.getById(1);
@@ -38,7 +44,7 @@ public class BrandServiceImplTests {
     @Test
     public void GetAll_Return_AllBrands(){
 
-        Mockito.when(mockRepository.getAll())
+        when(mockRepository.getAll())
                 .thenReturn(Arrays.asList(
                         new Brand("TestBrand1"),
                         new Brand("TestBrand2"),
@@ -55,7 +61,7 @@ public class BrandServiceImplTests {
     public void GetAllBrandProducts_Returns_AllBrandProducts(){
         Brand mockBrand = mock(Brand.class);
 
-        Mockito.when(mockRepository.getAllBrandProducts(1))
+        when(mockRepository.getAllBrandProducts(1))
                 .thenReturn(Arrays.asList(
                         new Product(mockBrand,"TestModel2",new Category("TestModel2"),"Test2",2),
                         new Product(mockBrand,"TestModel1",new Category("TestCategory1"),"Test",1)));
@@ -71,30 +77,29 @@ public class BrandServiceImplTests {
         Brand mockBrand1 = new Brand("MockBrand1");
         Brand mockBrand2 = new Brand("MockBrand2");
 
-        mockRepository.update(1,mockBrand2);
+        doNothing().when(mockRepository).update(isA(Integer.class),isA(Brand.class));
+        service.update(1,mockBrand2);
 
-        Assert.assertEquals(mockBrand2.getBrandName(),mockBrand1.getBrandName());
+        verify(mockRepository,times(1)).update(1,mockBrand2);
     }
+
+
 
     @Test
     public void CreateBrand_Returns_NewBrand(){
-        Brand mockBrand = new Brand();
-        try {
-            mockBrand.setBrandName("MockBrand");
-            mockRepository.create(mockBrand);
-        }catch (Exception e){
-            e.printStackTrace();
-            Assert.fail();
-        }
+        Brand brand = new Brand("Test");
+        doNothing().when(mockRepository).create(isA(Brand.class));
+        service.create(brand);
+
+        verify(mockRepository,times(1)).create(brand);
     }
 
     @Test
     public void DeleteBrand_Return_TheBrandHasBeenDeleted(){
-        try{
-            mockRepository.delete(1);
-        }catch (Exception e){
-            e.printStackTrace();
-            Assert.fail();
-        }
+        Brand brand = new Brand("Test");
+        doNothing().when(mockRepository).delete(isA(Integer.class));
+        service.delete(1);
+
+        verify(mockRepository,times(1)).delete(1);
     }
 }

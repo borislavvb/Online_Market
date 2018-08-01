@@ -27,6 +27,7 @@ public class Order {
 
     public Order(Customer customer) {
         this.customer = customer;
+        this.orderDate = new Date();
     }
 
     public int getId() {

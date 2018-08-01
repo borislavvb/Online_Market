@@ -1,35 +1,32 @@
 package com.wolverineteam.onlinemarket.services;
 
-import com.wolverineteam.onlinemarket.data.base.BrandRepository;
 import com.wolverineteam.onlinemarket.data.base.CategoryRepository;
-import com.wolverineteam.onlinemarket.models.Brand;
-import com.wolverineteam.onlinemarket.models.Category;
-import com.wolverineteam.onlinemarket.models.Product;
-import org.junit.Assert;
-import org.junit.Test;
+import com.wolverineteam.onlinemarket.models.*;
+import org.junit.*;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static org.mockito.Mockito.mock;
+import java.util.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CategoryServiceImplTests {
     @Mock
-    CategoryRepository mockRepository;
+    private CategoryRepository mockRepository;
 
     @InjectMocks
-    CategoryServiceImpl service;
+    private CategoryServiceImpl service;
+
+    @Before
+    public void beforeTest(){
+               service = new CategoryServiceImpl(mockRepository);
+    }
 
     @Test
     public void GetById_Return_CategoryWithSameId(){
 
-        Mockito.when(mockRepository.getById(1))
+        when(mockRepository.getById(1))
                 .thenReturn(new Category("TestCategory1"));
 
         Category result = service.getById(1);
@@ -40,7 +37,7 @@ public class CategoryServiceImplTests {
     @Test
     public void GetAll_Return_AllCategories(){
 
-        Mockito.when(mockRepository.getAll())
+        when(mockRepository.getAll())
                 .thenReturn(Arrays.asList(
                         new Category("TestCategory1"),
                         new Category("TestCategory2"),
@@ -57,7 +54,7 @@ public class CategoryServiceImplTests {
     public void GetAllCategoryProducts_Returns_AllCategoryProducts(){
         Category mockCategory = mock(Category.class);
 
-        Mockito.when(mockRepository.getAllCategoryProducts(1))
+        when(mockRepository.getAllCategoryProducts(1))
                 .thenReturn(Arrays.asList(
                         new Product(mock(Brand.class),"TestModel2",mockCategory,"Test2",2),
                         new Product(mock(Brand.class),"TestModel1",mockCategory,"Test",1)));
@@ -73,30 +70,27 @@ public class CategoryServiceImplTests {
         Category mockCategory1 = new Category("MockCategory1");
         Category mockCategory2 = new Category("MockCategory2");
 
-        mockRepository.update(1,mockCategory2);
+        doNothing().when(mockRepository).update(isA(Integer.class),isA(Category.class));
+        service.update(1,mockCategory2);
 
-        Assert.assertEquals(mockCategory2.getCategoryName(),mockCategory1.getCategoryName());
+        verify(mockRepository,times(1)).update(1,mockCategory2);
     }
 
     @Test
     public void CreateCategory_Returns_NewCategory(){
-        Category mockCategory = new Category();
-        try {
-            mockCategory.setCategoryName("MockBrand");
-            mockRepository.create(mockCategory);
-        }catch (Exception e){
-            e.printStackTrace();
-            Assert.fail();
-        }
+        Category category = new Category("Test");
+        doNothing().when(mockRepository).create(isA(Category.class));
+        service.create(category);
+
+        verify(mockRepository,times(1)).create(category);
     }
 
     @Test
     public void DeleteCategory_Return_TheCategoryHasBeenDeleted(){
-        try{
-            mockRepository.delete(1);
-        }catch (Exception e){
-            e.printStackTrace();
-            Assert.fail();
-        }
+        Category category = new Category("Test");
+        doNothing().when(mockRepository).delete(isA(Integer.class));
+        service.delete(1);
+
+        verify(mockRepository,times(1)).delete(1);
     }
 }

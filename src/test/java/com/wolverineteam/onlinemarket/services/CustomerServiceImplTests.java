@@ -15,7 +15,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.Mockito.mock;
+import static org.mockito.ArgumentMatchers.isA;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CustomerServiceImplTests {
@@ -57,31 +58,28 @@ public class CustomerServiceImplTests {
         Customer mockCustomer1 = new Customer("MockCustomer1","MockPass");
         Customer mockCustomer2 = new Customer("MockCustomer2","MockPass");
 
-        mockRepository.update(1,mockCustomer2);
+        doNothing().when(mockRepository).update(isA(Integer.class),isA(Customer.class));
+        service.update(1,mockCustomer2);
 
-        Assert.assertEquals(mockCustomer2.getUsername(),mockCustomer1.getUsername());
+        verify(mockRepository,times(1)).update(1,mockCustomer2);
     }
 
     @Test
     public void CreateCustomer_Returns_NewCustomer(){
-        Customer mockCustomer = new Customer();
-        try {
-            mockCustomer.setUsername("MockCustomer");
-            mockRepository.create(mockCustomer);
-        }catch (Exception e){
-            e.printStackTrace();
-            Assert.fail();
-        }
+        Customer mockCustomer = new Customer("MockUsername","MockPass");
+        doNothing().when(mockRepository).create(isA(Customer.class));
+        service.create(mockCustomer);
+
+        verify(mockRepository,times(1)).create(mockCustomer);
     }
 
     @Test
     public void DeleteCustomer_Return_TheCustomerHasBeenDeleted(){
-        try{
-            mockRepository.delete(1);
-        }catch (Exception e){
-            e.printStackTrace();
-            Assert.fail();
-        }
+        Customer customer = new Customer("TestUsername","TestPass");
+        doNothing().when(mockRepository).delete(isA(Integer.class));
+        service.delete(1);
+
+        verify(mockRepository,times(1)).delete(1);
     }
 
 }
