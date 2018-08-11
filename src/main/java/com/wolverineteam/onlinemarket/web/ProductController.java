@@ -40,9 +40,12 @@ public class ProductController {
         productService.update(id, product);
     }
 
-    @PostMapping("/create")
-    public void create(@RequestBody Product product) {
+    @PostMapping("/add")
+    public String create(Model model) {
+        Product product = new Product();
+        model.addAttribute("product", product);
         productService.create(product);
+        return "addProduct";
     }
 
     @DeleteMapping("/delete/{id}")
