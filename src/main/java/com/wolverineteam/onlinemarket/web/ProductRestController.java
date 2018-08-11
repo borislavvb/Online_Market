@@ -1,23 +1,20 @@
 package com.wolverineteam.onlinemarket.web;
 
-
 import com.wolverineteam.onlinemarket.models.Product;
 import com.wolverineteam.onlinemarket.services.base.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-@RequestMapping("/products")
-public class ProductController {
+@RestController
+@RequestMapping("/api/products")
+public class ProductRestController {
 
     private ProductService productService;
 
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductRestController(ProductService productService) {
         this.productService = productService;
     }
 
@@ -28,10 +25,8 @@ public class ProductController {
     }
 
     @GetMapping("/")
-    public String getAll(Model model) {
-        List<Product> products = productService.getAll();
-        model.addAttribute("allProducts", products);
-        return "products";
+    public List<Product> getAll() {
+        return productService.getAll();
     }
 
     @PutMapping("/update/{id}")
