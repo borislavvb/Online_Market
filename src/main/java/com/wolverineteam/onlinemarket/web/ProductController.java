@@ -1,7 +1,10 @@
 package com.wolverineteam.onlinemarket.web;
 
 
+import com.wolverineteam.onlinemarket.models.Brand;
 import com.wolverineteam.onlinemarket.models.Product;
+import com.wolverineteam.onlinemarket.services.BrandServiceImpl;
+import com.wolverineteam.onlinemarket.services.base.BrandService;
 import com.wolverineteam.onlinemarket.services.base.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,12 +43,18 @@ public class ProductController {
         productService.update(id, product);
     }
 
-    @PostMapping("/add")
+    @GetMapping("/add")
     public String create(Model model) {
         Product product = new Product();
         model.addAttribute("product", product);
         productService.create(product);
         return "addProduct";
+    }
+
+    @PostMapping("/add")
+    public String create(@ModelAttribute Product product) {
+        productService.create(product);
+        return "products";
     }
 
     @DeleteMapping("/delete/{id}")

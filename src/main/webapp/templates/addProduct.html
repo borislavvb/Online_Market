@@ -12,15 +12,23 @@
         </label>
         <label>
             Brand:
-            <input type="text" name="brand">
+            <input type="text" th:value="${product.brand.brandName}" name="brand">
+        </label>
+        <label>
+            BrandID:
+            <input type="number" th:value="${product.brand.id}" name="brandId">
         </label>
         <label>
             Description:
-            <input type="text" name="description">
+            <input type="text"  name="description">
         </label>
         <label>
             Category:
-            <input type="text" name="category">
+            <input type="text" th:value="${product.category.categoryName}" name="category">
+        </label>
+        <label>
+            CategoryID:
+            <input type="number" th:value="${product.category.id}" name="categoryId">
         </label>
         <label>
             Quantity:
