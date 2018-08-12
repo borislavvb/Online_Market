@@ -23,11 +23,11 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public Product getById(int id) {
         Product product = null;
-        try(Session session = sessionFactory.openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             product = session.get(Product.class, id);
             session.getTransaction().commit();
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 

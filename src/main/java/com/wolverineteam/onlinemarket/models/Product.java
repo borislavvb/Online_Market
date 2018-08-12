@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-@Table(name="products")
+@Table(name = "products")
 public class Product {
 
     @Id
@@ -30,7 +30,7 @@ public class Product {
     @Column(name = "Quantity")
     private int quantity;
 
-    public Product(){
+    public Product() {
 
     }
 
